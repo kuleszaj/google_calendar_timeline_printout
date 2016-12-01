@@ -43,8 +43,10 @@ def authorize
 end
 
 def hour_as_time(hour)
-  if hour <= 12
+  if hour < 12
     "#{hour}:00 AM"
+  elsif hour = 12
+    "12:00 PM"
   else
     "#{hour - 12}:00 PM"
   end
@@ -62,8 +64,8 @@ calendar_ids.each do |calendar_id|
   response = service.list_events(calendar_id,
                                  single_events: true,
                                  order_by: 'startTime',
-                                 time_min: (Date.today + 4).to_time.iso8601,
-                                 time_max: (Date.today + 5).to_time.iso8601)
+                                 time_min: Date.today.to_time.iso8601,
+                                 time_max: (Date.today + 1).to_time.iso8601)
 
   response.items.each do |event|
     name = event.summary
