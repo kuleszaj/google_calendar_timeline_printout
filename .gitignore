@@ -1,0 +1,6 @@
+vendor/
+*.html
+*.pdf
+.bundle
+client_secret.json
+calendars.json

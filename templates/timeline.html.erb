@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Atomic Google Calendar Timeline</title>
+    <style type="text/css">
+      body {
+        font-size: small;
+        font-family: DIN OT;
+      }
+      h1 {
+        font-size: large;
+      }
+      h2 {
+        font-size: medium;
+      }
+      h3 {
+        font-size: small;
+      }
+      h1.hour {
+        font-size: large;
+        border-top: 1px solid black;
+        padding-top: 10px;
+        margin-top: 10px;
+      }
+      h1.name {
+        text-align: center;
+      }
+      div.events {
+        border: 1px solid black;
+        border-radius: 5px;
+        width: 800px;
+        margin: 10px;
+        padding: 5px 10px;
+        page-break-after: always;
+      }
+      div.event {
+        border: 1px dashed grey ;
+        border-radius: 5px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+        width: 375px;
+        vertical-align:top;
+      }
+      div.subtext {
+        text-align: center;
+        padding-bottom: 10px;
+      }
+    </style>
+    <style type="text/css" media="print">
+        @page
+        {
+            size: auto;
+            margin: 0.25cm;
+        }
+    </style>
+  </head>
+  <body>
+  <h1>Timeline for <%= Date.today %></h1>
+  <div class="timeblock">
+    <% (8..18).each do |hour| %>
+    <% if events.find{|event|event[:start_time].hour == hour} %>
+    <h1 class="hour"><%= hour_as_time(hour) %></h1>
+    <div class="events">
+      <% events.find_all{|event|event[:start_time].hour == hour}.each do |event| %>
+        <div class="event">
+          <h2><%= event[:display_start_time] %> :: <%= event[:name] %></h2>
+          <h3><%= event[:calendar] %></h3>
+          <ul>
+            <li>End Time: <%= event[:display_stop_time] %></li>
+            <li>Duration: <%= event[:duration] %></li>
+            <% unless event[:organizer].blank? %>
+            <li>Organizer: <%= event[:organizer] %></li>
+            <% end %>
+          </ul>
+          <% unless event[:attendees].empty? %>
+            <h3>Attendees</h3>
+            <ul>
+            <% event[:attendees].each do |attendee| %>
+              <li><%= attendee %></li>
+            <% end %>
+            </ul>
+          <% end %>
+        </div>
+    <% end %>
+    </div>
+    <% end %>
+    <% end %>
+  </div>
+  </body>
+</html>
