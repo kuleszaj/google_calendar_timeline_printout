@@ -45,7 +45,7 @@ end
 def hour_as_time(hour)
   if hour < 12
     "#{hour}:00 AM"
-  elsif hour = 12
+  elsif hour == 12
     "12:00 PM"
   else
     "#{hour - 12}:00 PM"
