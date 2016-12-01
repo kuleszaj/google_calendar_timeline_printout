@@ -7,7 +7,7 @@ require 'json'
 require 'erb'
 require 'fileutils'
 
-#require 'pry'
+# require 'pry'
 
 include ActionView::Helpers::DateHelper
 
@@ -100,7 +100,6 @@ calendar_ids.each do |calendar_id|
                 organizer: organizer,
                 calendar: calendar_name }
   end
-
 end
 
 events.flatten!
