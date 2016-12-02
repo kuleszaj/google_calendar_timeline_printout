@@ -82,8 +82,12 @@ calendar_ids.each do |calendar_id|
 
     attendees = []
     organizer = ''
+    location = ''
 
     event&.attendees&.each do |attendee|
+      if attendee.resource
+        location = (attendee.display_name || attendee.email)
+      end
       unless attendee.resource
         attendees << (attendee.display_name || attendee.email)
       end
@@ -100,6 +104,7 @@ calendar_ids.each do |calendar_id|
                 duration: duration,
                 attendees: attendees,
                 organizer: organizer,
+                location: location,
                 calendar: calendar_name }
   end
 end

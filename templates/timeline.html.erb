@@ -72,6 +72,9 @@
             <% unless event[:organizer].blank? %>
             <li>Organizer: <%= event[:organizer] %></li>
             <% end %>
+            <% unless event[:location].blank? %>
+            <li>Location: <%= event[:location] %></li>
+            <% end %>
           </ul>
           <% unless event[:attendees].empty? %>
             <h3>Attendees</h3>
